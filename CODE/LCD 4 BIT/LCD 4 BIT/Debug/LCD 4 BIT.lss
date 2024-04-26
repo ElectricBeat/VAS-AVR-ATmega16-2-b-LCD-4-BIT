@@ -21,11 +21,11 @@ Idx Name          Size      VMA       LMA       File off  Algn
                   CONTENTS, READONLY, DEBUGGING
   8 .debug_frame  0000009c  00000000  00000000  00000d84  2**2
                   CONTENTS, READONLY, DEBUGGING
-  9 .debug_str    000001eb  00000000  00000000  00000e20  2**0
+  9 .debug_str    000001f3  00000000  00000000  00000e20  2**0
                   CONTENTS, READONLY, DEBUGGING
- 10 .debug_loc    000001cf  00000000  00000000  0000100b  2**0
+ 10 .debug_loc    000001cf  00000000  00000000  00001013  2**0
                   CONTENTS, READONLY, DEBUGGING
- 11 .debug_ranges 00000040  00000000  00000000  000011da  2**0
+ 11 .debug_ranges 00000040  00000000  00000000  000011e2  2**0
                   CONTENTS, READONLY, DEBUGGING
 
 Disassembly of section .text:
@@ -239,7 +239,7 @@ void LCD_Init (void)					/* LCD Initialize function */
 0000017a <main>:
 #include <util/delay.h>					/* Include inbuilt defined Delay header file */
 #include "lcd_4_bit.h"
-
+ 
 int main()
 {
 	LCD_Init();							/* Initialize LCD */
