@@ -9,7 +9,7 @@
 #include <avr/io.h>						/* Include AVR std. library file */
 #include <util/delay.h>					/* Include inbuilt defined Delay header file */
 #include "lcd_4_bit.h"
- 
+
 int main()
 {
 	LCD_Init();							/* Initialize LCD */

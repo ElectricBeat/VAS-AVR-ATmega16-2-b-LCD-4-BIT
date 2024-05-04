@@ -20,13 +20,13 @@ void LCD_Command(unsigned char cmnd)
 
 	LCD_Command_Port |= (1<<EN);		/* Enable pulse */
 	LCD_Data_Port = (LCD_Data_Port & 0X0F)|(cmnd & 0XF0);	/* sending upper nibble */
-	_delay_us(5);
+	_delay_us(1000);
 	LCD_Command_Port &= ~(1<<EN);
 	_delay_ms(1);
 
 	LCD_Command_Port |= (1<<EN);		/* Enable pulse */
 	LCD_Data_Port = (LCD_Data_Port & 0X0F)|(cmnd<<4);		/* sending lower nibble */
-	_delay_us(5);
+	_delay_us(1000);
 	LCD_Command_Port &= ~(1<<EN);
 	_delay_ms(1);
 }
@@ -37,13 +37,13 @@ void LCD_Char (unsigned char char_data)	/* LCD data write function */
 
 	LCD_Command_Port |= (1<<EN);		/* Enable Pulse */
 	LCD_Data_Port = (LCD_Data_Port & 0X0F)|(char_data & 0XF0);	/* sending upper nibble */
-	_delay_us(5);
+	_delay_us(1000);
 	LCD_Command_Port &= ~(1<<EN);
 	_delay_ms(1);
 
 	LCD_Command_Port |= (1<<EN);		/* Enable Pulse */
 	LCD_Data_Port = (LCD_Data_Port & 0X0F)|(char_data<<4);		/* sending lower nibble */
-	_delay_us(5);
+	_delay_us(1000);
 	LCD_Command_Port &= ~(1<<EN);
 	_delay_ms(1);
 }
