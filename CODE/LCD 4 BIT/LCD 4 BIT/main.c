@@ -10,15 +10,22 @@
 #include <util/delay.h>					/* Include inbuilt defined Delay header file */
 #include "lcd_4_bit.h"
 
+int Value;
+
 int main()
 {
 	LCD_Init();							/* Initialize LCD */
 
 	while (1)
 	{
+		Value++;
+
 		lcd_cursor(1,0);				/* Go to 1st line*/
 		LCD_String("VAS");				/* write string on 1st line of LCD*/
-		LCD_Command (0x1C);
-		_delay_ms(100);
+//		LCD_Command (0x1C);
+		_delay_ms(1000);
+		
+		lcd_cursor(2,0);				/* Go to 2nd line*/
+		LCD_number(Value);
 	}
 }

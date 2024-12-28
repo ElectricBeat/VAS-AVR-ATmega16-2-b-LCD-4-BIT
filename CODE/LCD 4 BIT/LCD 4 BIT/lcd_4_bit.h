@@ -19,13 +19,13 @@ void LCD_Command(unsigned char cmnd)
 	LCD_Command_Port &= ~(1<<RS);		/* RS=0 command reg. */
 
 	LCD_Command_Port |= (1<<EN);		/* Enable pulse */
-	LCD_Data_Port = (LCD_Data_Port & 0X0F)|(cmnd & 0XF0);	/* sending upper nibble */
+	LCD_Data_Port = (LCD_Data_Port & 0X0F)|(cmnd & 0XF0);		/* sending upper nibble */
 	_delay_us(1000);
 	LCD_Command_Port &= ~(1<<EN);
 	_delay_ms(1);
 
 	LCD_Command_Port |= (1<<EN);		/* Enable pulse */
-	LCD_Data_Port = (LCD_Data_Port & 0X0F)|(cmnd<<4);		/* sending lower nibble */
+	LCD_Data_Port = (LCD_Data_Port & 0X0F)|(cmnd<<4);			/* sending lower nibble */
 	_delay_us(1000);
 	LCD_Command_Port &= ~(1<<EN);
 	_delay_ms(1);
@@ -57,6 +57,39 @@ void LCD_String (char *str)				/* Send string to LCD function */
 	}
 }
 
+void LCD_number(uint32_t Number)
+{
+	uint8_t str[12];
+	uint8_t i,len = 0;
+	uint32_t n;
+	n = Number;
+
+	if(n == 0)							/* Initially the value of number is '0' */
+	{
+		str[0] = '0';					/* Directly send the '0' to the display */
+		str[1] = '\0';					/* Check the null condition */
+	}
+	else
+	{
+		while (n != 0)					/* Find the total length of the number */
+		{
+			len++;
+			n = n/10;
+		}
+		for (i = 0; i < len; i++)		/* Converting number into the string */
+		{
+			str[len - (i + 1)]  = ((Number % 10)+48);
+			Number = Number / 10;
+		}
+		str[len] = '\0';				/* Check the null condition */
+	}
+
+	for(i = 0;((str[i] != '\0') && (i <= len));i++)				/* Send the number string into the character */
+	{
+		LCD_Char(str[i]);
+	}
+}
+
 void lcd_cursor(unsigned char row,unsigned char col)
 {
 	if(row==1)
@@ -67,9 +100,6 @@ void lcd_cursor(unsigned char row,unsigned char col)
 	LCD_Command(0X94+col);
 	if(row==4)
 	LCD_Command(0XD4+col);
-	
-	//	if(col>20)
-	//	return;
 }
 
 void LCD_Clear()
